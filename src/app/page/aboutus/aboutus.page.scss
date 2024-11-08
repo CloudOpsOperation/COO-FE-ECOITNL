@@ -1,0 +1,69 @@
+.about-page {
+    --background: #f8f9fa;
+    color: #333;
+}
+
+/* Encabezado con fondo de imagen */
+.about-header {
+    background: url('../../../assets/backgrounds/intl-aboutus.jpg') no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.header-overlay {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Sección de servicios */
+.services-section {
+    padding: 40px 20px;
+}
+
+.services-section h2 {
+    font-size: 2em;
+    color: #006400; /* Verde oscuro */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.services-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Ajustes responsivos */
+@media (min-width: 768px) {
+    .about-header h1 {
+        font-size: 3.5em;
+    }
+    .services-section h2 {
+        font-size: 2.5em;
+    }
+}

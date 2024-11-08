@@ -1,0 +1,61 @@
+.home-page {
+  --background: #f0f4f8;
+  text-align: center;
+}
+
+.intro-section {
+  background-image: url('../../../assets/backgrounds/tree_background_menu.jpg'); // Imagen de fondo para la introducción
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  color: #fff;
+  position: relative;
+}
+
+.intro-overlay {
+  background-color: rgba(0, 0, 0, 0.5); // Sombra para hacer el texto más legible
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.intro-section h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0 0 20px;
+  color: #a4e85c; // Verde claro para resaltar el título
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.cards-row {
+  padding: 20px;
+}
+
+.info-card {
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 150px;
+  object-fit: cover;
+}
+
+ion-card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #388e3c; // Verde temático para las tarjetas
+}
+
+ion-card-content {
+  color: #333;
+  font-size: 0.9rem;
+}

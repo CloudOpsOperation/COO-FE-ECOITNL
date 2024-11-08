@@ -1,0 +1,27 @@
+<ion-menu contentId="main-content" >
+  <ion-content  >
+    <ion-list id="menu-list">
+      <ion-item-divider class="menu-divider">Menú</ion-item-divider>
+      <ion-menu-toggle auto-hide="false">
+        <ion-item lines="none" detail="false" routerDirection="root" [routerLink]="[getHomeRoute()]">
+          <ion-icon slot="start" name="home"></ion-icon>
+          <ion-button>
+            <ion-label>Inicio</ion-label>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" detail="false" routerDirection="root" [routerLink]="['/tree']">
+          <ion-icon slot="start" name="leaf"></ion-icon>
+          <ion-button>
+            <ion-label>Menu De Árboles</ion-label> 
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" detail="false" routerDirection="root" [routerLink]="['/aboutus']">
+          <ion-icon slot="start" name="information-circle"></ion-icon>
+          <ion-button>
+            <ion-label>Acerca de Arboles INTL</ion-label>
+          </ion-button>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
