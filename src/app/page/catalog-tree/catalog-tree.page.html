@@ -1,0 +1,42 @@
+
+
+<ion-content class="ion-padding">
+  <div class="header-overlay">
+    <h2>Descubre la riqueza arbórea de nuestro campus</h2>
+    <p>
+      Este catálogo contiene información detallada sobre los árboles, incluyendo su nombre común, científico, diámetro, altura, edad, y más.
+    </p>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Árboles</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col><strong>ID</strong></ion-col>
+          <ion-col><strong>Nombre Común</strong></ion-col>
+          <ion-col><strong>Nombre Científico</strong></ion-col>
+          <ion-col><strong>Diámetro</strong></ion-col>
+          <ion-col><strong>Fronda</strong></ion-col>
+          <ion-col><strong>Altura</strong></ion-col>
+          <ion-col><strong>Edad</strong></ion-col>
+          <ion-col><strong>Condición</strong></ion-col>
+          <ion-col><strong>Notas</strong></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let tree of trees">
+          <ion-col>{{ tree.tree_id }}</ion-col>
+          <ion-col>{{ tree.common_name }}</ion-col>
+          <ion-col>{{ tree.scientific_name }}</ion-col>
+          <ion-col>{{ tree.trunk_diameter }} Pulgadas</ion-col>
+          <ion-col>{{ tree.canopy_width }} M</ion-col>
+          <ion-col>{{ tree.height }} M</ion-col>
+          <ion-col>{{ tree.age }} Años</ion-col>
+          <ion-col>{{ tree.tree_condition }}</ion-col>
+          <ion-col>{{ tree.notes.Valid ? tree.notes.String : "Sin notas" }}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

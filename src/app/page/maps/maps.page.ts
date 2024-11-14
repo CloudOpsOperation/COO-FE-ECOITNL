@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MapsComponent } from 'src/app/components/maps/maps.component';
+import { MapsComponent } from '../../components/maps/maps.component';
+
 import { 
   IonContent, 
   IonHeader, 
@@ -21,7 +22,7 @@ import {
     IonToolbar, 
     CommonModule, 
     FormsModule,
-    MapsComponent
+    MapsComponent,
   ]
 })
 export class MapsPage implements OnInit {

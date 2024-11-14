@@ -19,7 +19,15 @@ export const routes: Routes = [
     loadComponent: () => import('./page/aboutus/aboutus.page').then( m => m.AboutusPage)
   },
   {
-    path: 'maps',
+    path: 'tree-maps',
     loadComponent: () => import('./page/maps/maps.page').then( m => m.MapsPage)
+  },
+  {
+    path: 'catalog-tree',
+    loadComponent: () => import('./page/catalog-tree/catalog-tree.page').then( m => m.CatalogTreePage)
+  },
+  {
+    path: 'catalog-location',
+    loadComponent: () => import('./page/catalog-location/catalog-location.page').then( m => m.CatalogLocationPage)
   },
 ];

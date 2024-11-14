@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
+import { NavController } from '@ionic/angular';
 import {
   IonGrid,
   IonRow,
@@ -31,13 +30,30 @@ from '@ionic/angular/standalone';
     IonCardSubtitle,
     IonButton,
     IonSplitPane,
-    RouterModule
   ],
 })
 export class TreePage  implements OnInit {
 
-  constructor() { }
+  constructor(
+    public navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
+
+  getMapRoute() : void {
+    this.navCtrl.navigateForward('/tree-maps');
+  }
+
+  getCatalogRoute() : void {
+    this.navCtrl.navigateForward('/catalog-tree');
+  }
+
+  getCatalogLocationRoute() : void {
+    this.navCtrl.navigateForward('/catalog-location');
+  }
+
+  getCommentRoute() : void {
+    this.navCtrl.navigateForward('/comment');
+  }
 
 }

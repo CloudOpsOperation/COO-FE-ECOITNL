@@ -1,1 +1,11 @@
-<div class="map" id="map" class="match-parent"></div>
+<div class="map" id="map">
+    <div class="map-controls">
+        <button (click)="zoomIn()">Zoom +</button>
+        <button (click)="zoomOut()">Zoom -</button>
+        <app-custom-select 
+            [label]="titleSelect"
+            [placeholder]="placeholderSelect"
+            [options]="optionsSelect">
+        </app-custom-select>
+    </div>
+</div>
