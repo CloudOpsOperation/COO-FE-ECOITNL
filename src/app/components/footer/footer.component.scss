@@ -1,0 +1,26 @@
+.footer-bar {
+    background-color: #228B22; /* Color de fondo verde */
+    padding: 10px;
+  }
+  
+  .footer-logo,
+  .footer-description,
+  .footer-social {
+    text-align: center;
+    color: #ffffff; /* Color de texto blanco */
+  }
+  
+  .footer-logo ion-icon,
+  .footer-social ion-icon {
+    color: #ffffff; /* Íconos en blanco */
+  }
+  
+  .footer-logo p,
+  .footer-description p {
+    margin: 5px 0;
+  }
+  
+  .footer-social ion-button {
+    margin: 0 8px;
+  }
+  

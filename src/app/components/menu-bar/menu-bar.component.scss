@@ -1,0 +1,76 @@
+ion-menu {
+  --background: rgba(0, 51, 25, 0.85); /* Verde oscuro translúcido */
+  backdrop-filter: blur(8px); /* Efecto de desenfoque */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  width: 270px;
+  padding-top: 20px;
+  min-width: 270px;
+  min-height: 1265px;
+}
+
+#menu-list {
+  padding: 10px;
+  z-index: 2;
+}
+
+.menu-divider {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #e0e0e0; /* Gris claro para resaltar en el fondo oscuro */
+  text-align: center;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #d9f5d3; /* Verde claro para destacar en el fondo oscuro */
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  transition: background-color 0.3s ease;
+}
+
+ion-item:hover {
+  --background: rgba(0, 128, 0, 0.2); /* Fondo verde claro en hover */
+}
+
+ion-icon {
+  color: #a3d9a5; /* Verde claro para iconos */
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+
+ion-menu ion-button {
+  --background: rgba(0, 102, 51, 0.6); /* Verde oscuro translúcido */
+  width: 100%;
+  color: #d9f5d3;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px;
+  transition: background-color 0.3s ease;
+  border: 1px solid rgba(0, 102, 51, 0.8);
+}
+
+ion-menu ion-button:hover {
+  --background: rgba(0, 128, 0, 0.5); /* Un poco más claro en hover */
+}
+
+
+// ion-menu ion-button {
+//   --background: rgba(0, 128, 0, 0.13); /* Color verde transparente */
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+//   width: 100%;
+//   background-color: var(--background); /* Usa el color de fondo definido */
+//   color: #000000; /* Color de texto */
+//   font-weight: bold;
+//   border-radius: 8px; /* Borde redondeado */
+//   padding: 2px 3px;
+//   margin: 2px 0; /* Espacio entre los botones */
+//   transition: background-color 0.3s ease; /* Transición suave en hover */
+//   border: 1px solid rgba(0, 128, 0, 0.5); /* Borde verde más oscuro */
+// }
+

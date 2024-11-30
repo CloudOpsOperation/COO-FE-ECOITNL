@@ -1,3 +1,29 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar color="success" class="tree-toolbar">
+      <ion-buttons slot="start">
+        <ion-button (click)="toggleMenu()">
+          <ion-icon slot="icon-only" name="menu" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title-background">
+          <ion-icon name="leaf-outline" slot="start" class="title-icon"></ion-icon>
+          INTL ÁRBOLES
+        </div>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="search" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="main-content" scrollY="false" class="global-page">
+    <ion-split-pane contentId="main">
+      <menu-bar  *ngIf="isMenuOpen" ></menu-bar>
+      <ion-router-outlet class="ion-page" id="main"></ion-router-outlet>
+    </ion-split-pane>
+  </ion-content>
+  <app-footer ></app-footer>
 </ion-app>

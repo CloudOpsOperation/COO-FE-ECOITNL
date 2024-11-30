@@ -1,0 +1,80 @@
+.home-content {
+  --ion-background-color: #f5f5f5;
+}
+
+.intro-section {
+  text-align: center;
+  padding: 20px;
+  background-color: #228B22;
+  color: #ffffff;
+}
+
+.intro-section h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.intro-section p {
+  font-size: 1.2rem;
+}
+
+.map-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.map {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  border: 3px solid #4CAF50; /* Verde más suave */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Botones para cambiar el zoom o el estilo del mapa */
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-controls button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.map-controls button:hover {
+  background-color: #388E3C;
+}
+
+.about-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.about-section h2 {
+  font-size: 1.8rem;
+  color: #228B22;
+  margin-bottom: 10px;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  color: #555555;
+  max-width: 600px;
+  margin: 0 auto;
+}

@@ -1,0 +1,57 @@
+.global-page {
+  --background: #f0f4f8;
+  text-align: center;
+}
+
+.tree-toolbar {
+  --background: #388e3c; /* Fondo verde para la barra */
+  --color: #ffffff; /* Color blanco para el texto */
+  border-bottom: 2px solid #2e7d32; /* Línea inferior */
+  position: relative;
+}
+
+/* Estilo para el contenedor de fondo del título */
+.title-background {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro translúcido */
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+}
+
+ion-title {
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.title-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+  color: #a5d6a7; /* Un tono más claro para el ícono de hoja */
+}
+
+ion-button {
+  --background-hover: rgba(255, 255, 255, 0.1); /* Fondo semitransparente al pasar el cursor */
+}
+
+ion-icon {
+  color: #ffffff; /* Color blanco para los iconos */
+}
+
+.tree-toolbar ion-button {
+  --background: transparent; /* Fondo transparente para botones */
+}
+
+.tree-toolbar ion-button:hover {
+  --background: rgba(255, 255, 255, 0.1); /* Efecto de hover */
+}
+
+ion-split-pane {
+  --side-width: 300px;
+  --side-max-width: 200px; 
+}
+
+

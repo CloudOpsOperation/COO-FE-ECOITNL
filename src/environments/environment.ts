@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { map } from "rxjs";
+
 export const environment = {
-  production: false
+  production: false,
+
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoibHVpc2phcmE5IiwiYSI6ImNtMjE3cHk4ajBlZngyanEyaXJucXJ0ZTMifQ.jrYVlD36f2I0y09xGHY67Q'
+  }
 };
 
 /*
