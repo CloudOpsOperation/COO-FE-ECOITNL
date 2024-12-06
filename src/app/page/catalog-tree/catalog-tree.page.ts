@@ -1,23 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import axios from 'axios'; // Importar Axios
-
+import { CardTableComponent } from 'src/app/components/card-table/card-table.component';
 import { 
   IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonImg, 
-  IonCardContent,
 } from '@ionic/angular/standalone';
+import { AxiosRequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-catalog-tree',
@@ -26,46 +12,60 @@ import {
   standalone: true,
   imports: [
     IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    CommonModule, 
-    FormsModule,
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonImg,
-    IonCardContent,
-  ]
+    CardTableComponent
+  ],
+  providers: [AxiosRequestService]
 })
 export class CatalogTreePage implements OnInit {
-  trees: any[] = []; // Array para almacenar los datos de los árboles
-  loading: boolean = true; // Indicador de carga
-  error: string = ''; // Mensaje de error, si ocurre
+  title: string = 'Descubre la riqueza arbórea de nuestro campus';
+  description: string = 'Este catálogo contiene información detallada sobre los árboles, incluyendo su nombre común, científico, diámetro, altura, edad, y más.';
+  tableTitle: string = 'Lista de Árboles';
+  columns: string[] = ['ID', 'Nombre Común', 'Nombre Científico', 'Diámetro', 'Fronda', 'Altura', 'Edad', 'Condición', 'Notas'];
+  rows: any[] = [];
+  page: number = 1;
+  pageSize: number = 20;
+  totalPage: number = 0; 
 
-  constructor() {}
+
+  constructor(private axiosRequestService: AxiosRequestService) { }
 
   ngOnInit() {
-    this.fetchTreeInfo();
+    this.fetchTreeInfo(this.page, this.pageSize);
   }
 
-  // Método para obtener datos del endpoint usando Axios
-  fetchTreeInfo() {
-    const apiUrl = 'http://127.0.0.1:8080/api/v1/treeinfo';
-    const body = { "PLimit": 0 };
+  async fetchTreeInfo( page: number = 1, pageSize: number = 20) {
+    const response = await this.axiosRequestService.request(
+      'http://127.0.0.1:8080/api/v1/treeinfo',
+      'POST',
+      { "Ppage": page, "PpageSize": pageSize },
+      { 'Content-Type': 'application/json' }
+    );
 
-    axios.post(apiUrl, body)
-      .then(response => {
-        this.trees = response.data;
-        this.loading = false;
-      })
-      .catch(error => {
-        this.error = error;
-        this.loading = false;
-      });
+    this.totalPage = response[0].totalPages;
+    this.rows.push(...response[0].trees.map((tree: any) => {
+      return [
+        tree.tree_id,
+        tree.common_name,
+        tree.scientific_name,
+        tree.trunk_diameter,
+        tree.canopy_width,
+        tree.height,
+        tree.age,
+        tree.tree_condition,
+        tree.notes.String
+      ];
+    }
+    ));
   }
+
+  async loadData(event: any) {
+    if (this.page < this.totalPage) {
+      this.page++;
+      await this.fetchTreeInfo(this.page, this.pageSize);
+      event.target.complete();    
+    } else {
+      event.target.disabled = true;
+    }
+  }
+
 }

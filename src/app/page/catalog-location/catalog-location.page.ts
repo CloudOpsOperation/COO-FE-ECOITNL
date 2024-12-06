@@ -1,22 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import axios from 'axios'; // Importar Axios
-
+import { CardTableComponent } from 'src/app/components/card-table/card-table.component';
+import { AxiosRequestService } from 'src/app/services/request.service';
 import { 
   IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonImg, 
-  IonCardContent,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -26,46 +12,55 @@ import {
   standalone: true,
   imports: [
     IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    CommonModule, 
-    FormsModule,
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonImg,
-    IonCardContent,
+    CardTableComponent
   ]
 })
 export class CatalogLocationPage implements OnInit {
-  trees: any[] = []; // Array para almacenar los datos de los árboles
-  loading: boolean = true; // Indicador de carga
-  error: string = ''; // Mensaje de error, si ocurre
+  title: string = 'Ubicación de los Árboles en el Campus';
+  description: string = 'Este catálogo muestra información básica sobre los árboles y sus ubicaciones mediante coordenadas de latitud y longitud.';
+  tableTitle: string = 'Lista de Árboles con Ubicación';
+  columns: string[] = ['ID', 'Nombre Común', 'Nombre Científico', 'Latitud', 'Longitud'];
+  rows: any[] = [];
+  page: number = 1;
+  pageSize: number = 20;
+  totalPage: number = 0; 
 
-  constructor() {}
+  constructor(private axiosRequestService: AxiosRequestService) { }
 
   ngOnInit() {
-    this.fetchTreeInfo();
+    this.fetchlocation(this.page, this.pageSize);
   }
 
-  // Método para obtener datos del endpoint usando Axios
-  fetchTreeInfo() {
-    const apiUrl = 'http://127.0.0.1:8080/api/v1/treeinfo-location';
-    const body = { "PLimit": 0 };
+  async fetchlocation( page: number = 1, pageSize: number = 20) {
+    const response = await this.axiosRequestService.request(
+      'http://127.0.0.1:8080/api/v1/treeinfo-location',
+      'POST',
+      { "Ppage": page, "PpageSize": pageSize },
+      { 'Content-Type': 'application/json' }
+    );
 
-    axios.post(apiUrl, body)
-      .then(response => {
-        this.trees = response.data;
-        this.loading = false;
-      })
-      .catch(error => {
-        this.error = error;
-        this.loading = false;
-      });
+    this.totalPage = response[0].totalPages;
+    this.rows.push(...response[0].location.map((location: any) => {
+      return [
+        location.tree_id,
+        location.common_name,
+        location.scientific_name,
+        location.latitude,
+        location.longitude
+      ];
+    }
+    ));
+    console.log(this.rows);
   }
+
+  async loadData(event: any) {
+    if (this.page < this.totalPage) {
+      this.page++;
+      await this.fetchlocation(this.page, this.pageSize);
+      event.target.complete();
+    } else {
+      event.target.disabled = true;
+    }
+  }
+
 }

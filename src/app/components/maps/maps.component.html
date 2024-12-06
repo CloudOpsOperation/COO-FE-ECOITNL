@@ -1,11 +1,35 @@
-<div class="map" id="map">
-    <div class="map-controls">
-        <button (click)="zoomIn()">Zoom +</button>
-        <button (click)="zoomOut()">Zoom -</button>
-        <app-custom-select 
-            [label]="titleSelect"
-            [placeholder]="placeholderSelect"
-            [options]="optionsSelect">
-        </app-custom-select>
-    </div>
-</div>
+<ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Controles del Mapa</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="map-controls">
+              <ion-button size="small" (click)="zoomIn()">Zoom +</ion-button>
+              <ion-button size="small" (click)="zoomOut()">Zoom -</ion-button>
+              <app-custom-select 
+                  [label]="titleSelect"
+                  [placeholder]="placeholderSelect"
+                  [options]="optionsSelect"
+                  (change)="changeMapStyle($event)">
+              </app-custom-select>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col size="12"  class="map" id="map">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+<app-modal-card 
+    [title]="titleModal"
+    [treeName]="treeName"
+    [treeData]="treeData"
+    [isModalOpen]="isModalOpen">
+</app-modal-card>
