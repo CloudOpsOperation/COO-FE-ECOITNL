@@ -30,4 +30,8 @@ export const routes: Routes = [
     path: 'catalog-location',
     loadComponent: () => import('./page/catalog-location/catalog-location.page').then( m => m.CatalogLocationPage)
   },
+  {
+    path: 'scan-code',
+    loadComponent: () => import('./page/scan-code/scan-code.page').then( m => m.ScanCodePage)
+  }
 ];

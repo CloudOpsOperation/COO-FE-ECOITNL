@@ -167,9 +167,11 @@ export class MapsComponent implements OnInit {
             coordinates: [parseFloat(location.longitude), parseFloat(location.latitude)]
           },
           properties: {
-            ID: location.id,
+            number: location.tree_id,
             title: location.common_name,
-            description: location.scientific_name
+            description: location.scientific_name,
+            latitude: location.latitude,
+            longitude: location.longitude,
           }
         };
       } );
