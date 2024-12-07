@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   IonContent,
   IonModal,
   IonHeader,
   IonTitle,
   IonButton,
+  IonButtons,
   IonToolbar,
   IonCard,
   IonCardHeader,
@@ -14,7 +16,8 @@ import {
   IonRow,
   IonCol,
   IonIcon,
-} from '@ionic/angular';
+  IonThumbnail
+} from '@ionic/angular/standalone';
 
 
 @Component({
@@ -28,6 +31,7 @@ import {
     IonHeader,
     IonTitle,
     IonButton,
+    IonButtons,
     IonToolbar,
     IonCard,
     IonCardHeader,
@@ -37,20 +41,32 @@ import {
     IonRow,
     IonCol,
     IonIcon,
+    CommonModule,
+    IonThumbnail
   ],
 })
 export class ModalCardComponent {
-  @Input() title = '';
-  @Input() treeName = '';
+  @Input() title = 'Modal Card';
+  @Input() treeName = 'Modal Card';
   @Input() treeData: { [key: string]: any } = {};
-  @Input() isModalOpen = false;
+  @Input() modalOpen = false;
+  @Input() imageUrl = '';
 
+  isModalOpen = false;
+  keys: string[] = [];
 
-  getKeys(data: { [key: string]: any }): string[] {
-    return Object.keys(data); // Extrae las claves del JSON
+  ngOnChanges() {
+    if (this.modalOpen !== this.isModalOpen) {
+      this.isModalOpen = this.modalOpen;
+      this.keys = Object.keys(this.treeData);
+      console.log( 'Open', this.isModalOpen, 'keys', this.keys, 'treeData', this.treeData);
+    }
   }
 
   setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+    console.log('isModalOpen', this.isModalOpen); 
+    if (this.isModalOpen !== isOpen) {
+      this.isModalOpen = isOpen;
+    }
   }
 }

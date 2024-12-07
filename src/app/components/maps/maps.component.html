@@ -28,8 +28,11 @@
   </ion-grid>
   
 <app-modal-card 
+    *ngIf="isModalOpen"
     [title]="titleModal"
     [treeName]="treeName"
     [treeData]="treeData"
-    [isModalOpen]="isModalOpen">
+    [modalOpen]="isModalOpen"
+    [imageUrl]="'assets/icon/tree.png'"
+    >
 </app-modal-card>

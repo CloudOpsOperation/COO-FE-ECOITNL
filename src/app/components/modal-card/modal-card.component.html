@@ -1,28 +1,36 @@
 <ion-content class="ion-padding">
   <ion-modal [isOpen]="isModalOpen">
-    <ng-content>
+    <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="success">
           <ion-title>{{ title }}</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)">Close</ion-button>
+            <ion-button (click)="setOpen(false)" color="light">Cerrar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-card>
+        <ion-card class="modal-card">
           <ion-card-header>
+            <div class="image-container">
+              <img
+                [src]="imageUrl || 'assets/icon/tree.png'"
+                alt="tree"
+                class="tree-image"
+              />
+            </div>
             <ion-card-title>{{ treeName }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-grid>
-              <ion-row *ngFor="let key of getKeys(treeData)">
-                <ion-col size="6"><strong>{{ key }}</strong></ion-col>
-                <ion-col size="6">{{ treeData[key] || 'N/A' }}</ion-col>
+            <ion-grid class="styled-grid">
+              <ion-row *ngFor="let key of keys">
+                <ion-col size="6" class="key-cell">{{ key | titlecase }}</ion-col>
+                <ion-col size="6" class="value-cell">{{ treeData[key] }}</ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-content>
         </ion-card>
-      </ion-content> 
-    </ng-content>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

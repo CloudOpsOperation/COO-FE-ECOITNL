@@ -4,6 +4,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { CustomSelectComponent } from 'src/app/components/custom-select/custom-select.component';
 import { AxiosRequestService } from 'src/app/services/request.service';
 import { ModalCardComponent } from '../modal-card/modal-card.component';
+import { CommonModule } from '@angular/common';
 import { 
   IonContent,
   IonGrid,
@@ -33,6 +34,7 @@ import {
     IonCardContent,
     IonButton,
     ModalCardComponent,
+    CommonModule
   ]
 })
 export class MapsComponent implements OnInit {
@@ -42,6 +44,12 @@ export class MapsComponent implements OnInit {
   lng: number = -100.2444561;
   zoomLevel: number = 16.5;
   container: string = 'map';
+
+  //
+  titleModal: any = '';
+  treeName: any = '';
+  treeData: { [key: string]: any } = {};
+  isModalOpen = false;
 
   // Select Data
   titleSelect = 'Select a map style';
@@ -59,6 +67,21 @@ export class MapsComponent implements OnInit {
 
   ngOnInit() {
     this.initMap();
+    if (this.map) {
+      this.map.on('click', 'trees', (e) => {
+        const data: any = this.map?.queryRenderedFeatures(e.point, {
+          layers: ['trees']
+        })[0].properties;
+      
+        this.titleModal = 'ARBOL SELECCIONADO';
+        this.treeName = data.title;
+        this.treeData = data;
+        this.isModalOpen = true;
+
+        console.log(data);
+
+      });
+    }
   }
 
   initMap() {
@@ -144,6 +167,7 @@ export class MapsComponent implements OnInit {
             coordinates: [parseFloat(location.longitude), parseFloat(location.latitude)]
           },
           properties: {
+            ID: location.id,
             title: location.common_name,
             description: location.scientific_name
           }
@@ -171,7 +195,6 @@ export class MapsComponent implements OnInit {
             'icon-allow-overlap': true
           }
         });
-      }
-
+      } 
   }
 }
