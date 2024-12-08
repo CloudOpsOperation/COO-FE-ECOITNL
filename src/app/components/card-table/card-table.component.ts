@@ -49,6 +49,7 @@ export class CardTableComponent {
   @Input() columns: Array<string> = [];
   @Input() rows: Array<Array<any>> = [];
   @Input() loadData: Function = () => {};
+  @Input() rowClick: Function = (row: any) => {}; 
 
   load(event: any) {
     if (this.loadData) {
@@ -59,4 +60,9 @@ export class CardTableComponent {
     }
   }
 
+  onRowClick(row: any) {
+    if (this.rowClick) {
+      this.rowClick(row);
+    } 
   }
+}

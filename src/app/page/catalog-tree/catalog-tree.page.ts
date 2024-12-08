@@ -68,4 +68,28 @@ export class CatalogTreePage implements OnInit {
     }
   }
 
+  async onRowClick(row: any) {
+    const id = row[0]; 
+    console.log('Fila clickeada:', id);
+
+    const response = await this.axiosRequestService.request(
+      'http://127.0.0.1:8080/api/v1/genarateqr',
+      'POST',
+      { "PtreeID": id },
+      { 'Content-Type': 'application/json' },
+      'blob'
+    );
+
+    if (response && response instanceof Blob) {
+      const url = window.URL.createObjectURL(response);  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `tree_${id}.png`;  
+      link.click();
+      window.URL.revokeObjectURL(url);  
+    } else {
+      console.error('La respuesta no es un Blob válido.');
+    }
+  }
+
 }

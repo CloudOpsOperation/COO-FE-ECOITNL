@@ -17,7 +17,7 @@
             <strong>{{ col }}</strong>
           </ion-col>
         </ion-row>
-        <ion-row *ngFor="let row of rows">
+        <ion-row *ngFor="let row of rows" (click)="onRowClick(row)">
           <ion-col *ngFor="let col of columns; let i = index">
             {{ row[i] }}
           </ion-col>
