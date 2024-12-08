@@ -4,6 +4,7 @@ import {
   IonContent, 
 } from '@ionic/angular/standalone';
 import { AxiosRequestService } from 'src/app/services/request.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-catalog-tree',
@@ -34,8 +35,9 @@ export class CatalogTreePage implements OnInit {
   }
 
   async fetchTreeInfo( page: number = 1, pageSize: number = 20) {
+    const apiUrl = `${environment.apiUrl}/treeinfo`;
     const response = await this.axiosRequestService.request(
-      'http://127.0.0.1:8080/api/v1/treeinfo',
+      apiUrl,
       'POST',
       { "Ppage": page, "PpageSize": pageSize },
       { 'Content-Type': 'application/json' }
@@ -71,9 +73,9 @@ export class CatalogTreePage implements OnInit {
   async onRowClick(row: any) {
     const id = row[0]; 
     console.log('Fila clickeada:', id);
-
+    const apiUrl = `${environment.apiUrl}/genarateqr`;
     const response = await this.axiosRequestService.request(
-      'http://127.0.0.1:8080/api/v1/genarateqr',
+      apiUrl,
       'POST',
       { "PtreeID": id },
       { 'Content-Type': 'application/json' },

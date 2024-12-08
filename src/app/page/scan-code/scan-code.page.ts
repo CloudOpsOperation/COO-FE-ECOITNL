@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Html5Qrcode } from "html5-qrcode";
 import { ModalCardComponent } from 'src/app/components/modal-card/modal-card.component';
 import { AxiosRequestService } from 'src/app/services/request.service';
+import { environment } from 'src/environments/environment';
 import {
   IonHeader,
   IonToolbar,
@@ -117,8 +118,9 @@ export class ScanCodePage  implements OnInit {
   }
 
   async openModal( id: number ) {
+    const apiUrl = `${environment.apiUrl}/treeinfobyid`;
     const response = await this.axiosRequestService.request(
-      'http://127.0.0.1:8080/api/v1/treeinfobyid',
+      apiUrl,
       'POST',
       { "PtreeID": id },
       { 'Content-Type': 'application/json' }

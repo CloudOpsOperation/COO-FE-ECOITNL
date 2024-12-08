@@ -5,6 +5,7 @@ import { CustomSelectComponent } from 'src/app/components/custom-select/custom-s
 import { AxiosRequestService } from 'src/app/services/request.service';
 import { ModalCardComponent } from '../modal-card/modal-card.component';
 import { CommonModule } from '@angular/common';
+
 import { 
   IonContent,
   IonGrid,
@@ -153,8 +154,9 @@ export class MapsComponent implements OnInit {
   }
 
    async markLocation() {
+    const apiUrl = `${environment.apiUrl}/treeinfo-location`;
       const response = await this.axiosRequestService.request(
-        'http://127.0.0.1:8080/api/v1/treeinfo-location',
+        apiUrl,
         'POST',
         { "Ppage": 1, "PpageSize": 10 },
         { 'Content-Type': 'application/json' }

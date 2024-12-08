@@ -4,6 +4,7 @@ import { AxiosRequestService } from 'src/app/services/request.service';
 import { 
   IonContent, 
 } from '@ionic/angular/standalone';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-catalog-location',
@@ -32,8 +33,9 @@ export class CatalogLocationPage implements OnInit {
   }
 
   async fetchlocation( page: number = 1, pageSize: number = 20) {
+    const apiUrl = `${environment.apiUrl}/treeinfo-location`;
     const response = await this.axiosRequestService.request(
-      'http://127.0.0.1:8080/api/v1/treeinfo-location',
+      apiUrl,
       'POST',
       { "Ppage": page, "PpageSize": pageSize },
       { 'Content-Type': 'application/json' }
