@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Html5Qrcode } from "html5-qrcode";
+import { ModalCardComponent } from 'src/app/components/modal-card/modal-card.component';
+import { AxiosRequestService } from 'src/app/services/request.service';
 import {
   IonHeader,
   IonToolbar,
@@ -37,30 +39,41 @@ from '@ionic/angular/standalone';
     IonCardContent,
     IonIcon,
     CommonModule,
-    IonText
+    IonText,
+    ModalCardComponent
   ]
 })
-export class ScanCodePage  implements OnInit {
-  isScanning = false; // Controla si se está escaneando
+export class ScanCodePage  implements OnInit {  
+  isScanning = false; 
   scannedData: string | null = null;
   qrCodeScanner: Html5Qrcode | null = null;
+  isModalOpen=false;
+  titleModal='';
+  modalName='';
+  modalData: { [key: string]: any } = {};
 
-  constructor() {}
+  constructor(private axiosRequestService: AxiosRequestService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.requestPermission();
+  }
 
-  async pedirPermisosCamara(): Promise<boolean> {
+  async requestPermission() {
     try {
       await navigator.mediaDevices.getUserMedia({ video: true });
       return true;
     } catch (error) {
-      alert("No se pudo acceder a la cámara. Asegúrate de haber otorgado permisos.");
+      alert("Not allowed to use camera");
       return false;
     }
   }
 
   async stopScan() {
     this.isScanning = false;
+    this.isModalOpen = false;
+    this.titleModal = '';
+    this.modalName = '';
+    this.modalData = {};
     if (this.qrCodeScanner) {
       await this.qrCodeScanner.stop();
       this.qrCodeScanner.clear();
@@ -68,36 +81,64 @@ export class ScanCodePage  implements OnInit {
   }
 
   async startScan() {
-    if (this.isScanning) {
-      this.isScanning = false;
-      if (this.qrCodeScanner) {
-        await this.qrCodeScanner.stop();
-        this.qrCodeScanner.clear();
-      }
-    } else {
-      const permisosConcedidos = await this.pedirPermisosCamara();
-      if (permisosConcedidos) {
-        this.isScanning = true;
-        if (!this.qrCodeScanner) {
-          this.qrCodeScanner = new Html5Qrcode("reader"); // Aquí está el contenedor 'reader'
-        }
-  
-        try {
-          await this.qrCodeScanner.start(
-            { facingMode: "environment" }, // Cámara trasera
-            { fps: 10, qrbox: 250 },
-            (decodedText) => {
-              this.scannedData = decodedText;
-              this.stopScan(); // Detener escaneo automáticamente después de leer un código
-            },
-            (error) => {
-              console.warn("Error al escanear:", error);
-            }
-          );
-        } catch (err) {
-          console.error("Error iniciando el escáner:", err);
-        }
-      }
+    this.isScanning = true;
+    if (!this.qrCodeScanner) {
+      this.qrCodeScanner = new Html5Qrcode("reader");
     }
+
+    try {
+      await this.qrCodeScanner.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 250 },
+        (decodedText) => {
+          this.scannedData = decodedText;
+          this.stopScan();
+          this.openModal( parseInt(this.scannedData) );
+        },
+        (error) => {
+          console.warn("Error scanning:", error);
+        }
+      );
+    } catch (err) {
+      console.error("Error initializing scanner:", err);
+    }
+  }
+
+  async onScan() {
+    await this.requestPermission();
+    if (this.isScanning) {
+      console.log("Stopping scan");
+      this.stopScan();
+    } else if (!this.isScanning) {
+      console.log("Starting scan");
+      this.startScan();
+      console.log(this.scannedData)
+    }
+  }
+
+  async openModal( id: number ) {
+    const response = await this.axiosRequestService.request(
+      'http://127.0.0.1:8080/api/v1/treeinfobyid',
+      'POST',
+      { "PtreeID": id },
+      { 'Content-Type': 'application/json' }
+    );
+
+    this.isModalOpen = true;
+    this.titleModal = 'Modal Card';
+    this.modalName = 'Modal Card';
+    const data = {
+      Arbol: response.tree_id,
+      nombre: response.common_name,
+      Científico: response.scientific_name,
+      latitud: response.latitude,
+      longitud: response.longitude,
+      altura: response.height,
+      diametro: response.trunk_diameter,
+      ancho: response.canopy_width,
+      edad: response.age,
+      estado: response.tree_condition,
+    }
+    this.modalData = data;
   }
 }

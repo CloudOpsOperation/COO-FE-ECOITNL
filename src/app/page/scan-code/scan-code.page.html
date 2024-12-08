@@ -1,26 +1,29 @@
 <ion-content class="ion-padding">
   <div class="scanner-container">
-    <!-- Mostrar ícono o cámara dependiendo del estado -->
-    <div *ngIf="!isScanning" class="scanner-box">
-      <ion-icon name="qr-code-outline" class="qr-icon"></ion-icon>
+    <div class="scanner-box" id="reader">
+      <ion-icon *ngIf="!isScanning" name="qr-code-outline" class="qr-icon"></ion-icon>
     </div>
-    <div *ngIf="isScanning" id="reader" class="reader"></div>
   </div>
 
   <ion-text class="scan-instruction">
     <h3 *ngIf="!isScanning">Coloca el código QR dentro del recuadro para escanear.</h3>
   </ion-text>
 
-  <ion-button expand="block" color="primary" (click)="startScan()">
+  <ion-button expand="block" color="primary" (click)="onScan()">
     {{ isScanning ? 'Detener Escaneo' : 'Iniciar Escaneo' }}
   </ion-button>
 
-  <ion-card *ngIf="scannedData" class="result-card">
-    <ion-card-header>
-      <ion-card-title>Resultado</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ scannedData }}</p>
-    </ion-card-content>
-  </ion-card>
+  <ion-text class="scan-instruction">
+    <h3 *ngIf="isScanning">Escaneando el identificador del árbol es: {{ scannedData }}</h3>
+  </ion-text>
+
+  <app-modal-card 
+    *ngIf="isModalOpen"
+    [title]="titleModal"
+    [treeName]="modalName"
+    [treeData]="modalData"
+    [modalOpen]="isModalOpen"
+    [imageUrl]="'assets/icon/tree.png'"
+    >
+  </app-modal-card>
 </ion-content>
