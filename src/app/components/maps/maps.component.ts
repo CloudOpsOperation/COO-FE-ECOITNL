@@ -154,14 +154,12 @@ export class MapsComponent implements OnInit {
   }
 
    async markLocation() {
-    const apiUrl = `${environment.apiUrl}/treeinfo-location`;
+    const apiUrl = `${environment.apiUrl}/treeinfo-location-all`;
       const response = await this.axiosRequestService.request(
         apiUrl,
-        'POST',
-        { "Ppage": 1, "PpageSize": 10 },
-        { 'Content-Type': 'application/json' }
+        'GET'
       );
-      const locations = response[0].location.map((location: any) => {
+      const locations = response.map((location: any) => {
         return {
           type: 'Feature',
           geometry: {
