@@ -6,6 +6,8 @@ import {
   IonSelectOption,
 }
 from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-custom-select',
@@ -17,6 +19,7 @@ from '@ionic/angular/standalone';
     IonItem,
     IonSelect,
     IonSelectOption,
+    CommonModule
   ]
 })
 export class CustomSelectComponent {

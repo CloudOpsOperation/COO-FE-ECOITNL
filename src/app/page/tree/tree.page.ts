@@ -56,4 +56,8 @@ export class TreePage  implements OnInit {
     this.navCtrl.navigateForward('/comment');
   }
 
+  getScanRoute() : void {
+    this.navCtrl.navigateForward('/scan-code');
+  }
+
 }

@@ -12,7 +12,8 @@ import {
   IonCardTitle,
   IonCardContent,
   IonCardSubtitle,
-  IonButton
+  IonButton,
+  NavController
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -37,5 +38,27 @@ import {
   ]
 })
 export class HomePage {
-  constructor() {}
+  constructor(
+    public navCtrl: NavController
+  ) {}
+
+  getMapRoute() : void {
+    this.navCtrl.navigateForward('/tree-maps');
+  }
+
+  getCatalogRoute() : void {
+    this.navCtrl.navigateForward('/catalog-tree');
+  }
+
+  getCatalogLocationRoute() : void {
+    this.navCtrl.navigateForward('/catalog-location');
+  }
+
+  getCommentRoute() : void {
+    this.navCtrl.navigateForward('/comment');
+  }
+
+  getScanRoute() : void {
+    this.navCtrl.navigateForward('/scan-code');
+  }
 }

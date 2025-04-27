@@ -1,32 +1,10 @@
-<ion-content class="ion-padding">
-  <div class="header-overlay">
-    <h2>Ubicación de los Árboles en el Campus</h2>
-    <p>
-      Este catálogo muestra información básica sobre los árboles y sus ubicaciones mediante coordenadas de latitud y longitud.
-    </p>
-  </div>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Lista de Árboles con Ubicación</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col><strong>ID</strong></ion-col>
-          <ion-col><strong>Nombre Común</strong></ion-col>
-          <ion-col><strong>Nombre Científico</strong></ion-col>
-          <ion-col><strong>Latitud</strong></ion-col>
-          <ion-col><strong>Longitud</strong></ion-col>
-        </ion-row>
-        <ion-row *ngFor="let tree of trees">
-          <ion-col>{{ tree.tree_id }}</ion-col>
-          <ion-col>{{ tree.common_name }}</ion-col>
-          <ion-col>{{ tree.scientific_name }}</ion-col>
-          <ion-col>{{ tree.latitude }}</ion-col>
-          <ion-col>{{ tree.longitude }}</ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+<ion-content>
+  <app-card-table
+    [title]="title"
+    [description]="description"
+    [tableTitle]="tableTitle"
+    [columns]="columns"
+    [rows]="rows"
+    [loadData]="loadData.bind(this)"> 
+  </app-card-table>
 </ion-content>
